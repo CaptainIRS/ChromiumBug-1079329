@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chrome Bug</title>
+</head>
+
+<body style="width: 420px; height: 260px">
+
+<script>
+    let canvas = document.createElement('canvas');
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientHeight;
+    document.body.insertBefore(canvas, document.body.childNodes[0]);
+    let context = canvas.getContext('2d');
+
+    let angle = 0;
+
+    function update() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = '#000000';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        context.lineCap = "butt";
+        context.beginPath();
+        context.strokeStyle = '#F00';
+        context.lineWidth = 20;
+        context.arc(
+            100,
+            100,
+            50,
+            angle,
+            angle + 1 / 2 * Math.PI
+        );
+        context.stroke();
+
+        context.lineCap = "round";
+        context.beginPath();
+        context.strokeStyle = '#F00';
+        context.lineWidth = 20;
+        context.arc(
+            220,
+            100,
+            50,
+            angle,
+            angle + 1 / 2 * Math.PI
+        );
+        context.stroke();
+
+        context.lineCap = "square";
+        context.beginPath();
+        context.strokeStyle = '#F00';
+        context.lineWidth = 20;
+        context.arc(
+            340,
+            100,
+            50,
+            angle,
+            angle + 1 / 2 * Math.PI
+        );
+        context.stroke();
+
+        angle += 0.02;
+        window.requestAnimationFrame(update);
+    }
+
+    update();
+</script>
